@@ -14,7 +14,7 @@ class DrawerWidget extends StatelessWidget {
           children: <Widget>[
             UserAccountsDrawerHeader(
               decoration: const BoxDecoration(
-                color: Colors.redAccent,
+                color: Colors.white,
               ),
               accountEmail: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

@@ -18,6 +18,33 @@ class _NotifScreenState extends State<NotifScreen> {
           centerTitle: true,
           title: TextBold(
               text: 'Notifications', fontSize: 25, color: Colors.black)),
+      body: Expanded(
+        child: SizedBox(
+          child: ListView.builder(itemBuilder: ((context, index) {
+            return Padding(
+              padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
+              child: Card(
+                elevation: 10,
+                child: ListTile(
+                  title: TextBold(
+                      text: 'Admin has received your bookings',
+                      fontSize: 16,
+                      color: Colors.black),
+                  subtitle: TextBold(
+                      text: '1 minute ago', fontSize: 12, color: Colors.grey),
+                  trailing: IconButton(
+                    onPressed: (() {}),
+                    icon: const Icon(
+                      Icons.delete,
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+            );
+          })),
+        ),
+      ),
     );
   }
 }

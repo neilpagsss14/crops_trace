@@ -34,7 +34,6 @@ class _MainMenuState extends State<MainMenu> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.green,
-        drawer: const DrawerWidget(),
         appBar: AppBar(
             centerTitle: true,
             backgroundColor: Colors.white,
@@ -53,7 +52,7 @@ class _MainMenuState extends State<MainMenu> {
                   TextBold(
                       text: 'Hello! Welcome Back Customer',
                       fontSize: 20,
-                      color: Colors.black),
+                      color: Colors.white),
                   Expanded(child: Container()),
                   const Icon(
                     Icons.person,
