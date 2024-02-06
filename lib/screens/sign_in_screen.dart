@@ -105,6 +105,8 @@ class _SignInState extends State<SignIn> {
                 padding: const EdgeInsets.only(left: 15, right: 15),
                 child: ButtonWidget(
                   label: 'Log in',
+                  fontSize: 20,
+                  textcolor: Colors.white,
                   onPressed: () {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
                         builder: (context) => const HomeScreen()));
@@ -114,7 +116,7 @@ class _SignInState extends State<SignIn> {
                             fontSize: 12,
                             color: Colors.white)));
                   },
-                  color: Colors.white,
+                  color: Colors.green.shade600,
                 ),
               ),
               TextButton(

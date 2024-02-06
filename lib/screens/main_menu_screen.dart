@@ -1,8 +1,8 @@
-import 'package:crop_traceability/screens/sign_in_screen.dart';
-import 'package:crop_traceability/screens/splash_screen.dart';
-import 'package:crop_traceability/widgets/drawer_widget.dart';
+import 'package:crop_traceability/widgets/button_widget.dart';
+import 'package:crop_traceability/widgets/color_widget.dart';
+
 import 'package:crop_traceability/widgets/text_widget.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 
@@ -33,7 +33,7 @@ class _MainMenuState extends State<MainMenu> {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.green.shade600,
         appBar: AppBar(
             centerTitle: true,
             backgroundColor: Colors.white,
@@ -92,42 +92,130 @@ class _MainMenuState extends State<MainMenu> {
                   itemCount: 5),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 15),
-              child: MaterialButton(
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: TextRegular(
-                          text: 'Proceeding',
-                          fontSize: 12,
-                          color: Colors.white)));
-                },
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 150,
-                  decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.only(
-                          topRight: Radius.circular(60),
-                          topLeft: Radius.circular(20),
-                          bottomLeft: Radius.circular(20),
-                          bottomRight: Radius.circular(20)),
-                      image: DecorationImage(
-                          fit: BoxFit.fitWidth,
-                          colorFilter: ColorFilter.mode(
-                              Colors.white.withOpacity(0.8), BlendMode.dstATop),
-                          image: const AssetImage('assets/images/docu_6.jpg'))),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+              padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: 150,
+                decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.only(
+                        topRight: Radius.circular(60),
+                        topLeft: Radius.circular(20),
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20)),
+                    image: DecorationImage(
+                        fit: BoxFit.fitWidth,
+                        colorFilter: ColorFilter.mode(
+                            Colors.white.withOpacity(0.8), BlendMode.dstATop),
+                        image: const AssetImage('assets/images/docu_6.jpg'))),
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 25),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      TextBold(
-                          text: 'Book a Delivery',
-                          fontSize: 45,
-                          color: Colors.amber),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: ButtonWidget(
+                          label: 'Book a Delivery',
+                          onPressed: () {},
+                          color: Colors.white,
+                          textcolor: Colors.red,
+                          fontSize: 15,
+                          radius: 200,
+                          height: 30,
+                          width: 30,
+                        ),
+                      )
                     ],
                   ),
                 ),
               ),
-            )
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 12),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Card(
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Container(
+                      height: 125,
+                      width: MediaQuery.of(context).size.width / 2.25,
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.circular(10),
+                        image: const DecorationImage(
+                            image: AssetImage(
+                              'assets/images/recent.jpg',
+                            ),
+                            fit: BoxFit.cover),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Align(
+                            alignment: Alignment.center,
+                            child: ButtonWidget(
+                              color: Colors.white,
+                              textcolor: grey,
+                              radius: 100,
+                              fontSize: 12,
+                              width: 60,
+                              height: 25,
+                              label: 'Recent Deliveries',
+                              onPressed: () {},
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Card(
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Container(
+                      height: 125,
+                      width: MediaQuery.of(context).size.width / 2.25,
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.circular(10),
+                        image: const DecorationImage(
+                            opacity: 50,
+                            image: AssetImage(
+                              'assets/images/facts.jpg',
+                            ),
+                            fit: BoxFit.cover),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Align(
+                            alignment: Alignment.center,
+                            child: ButtonWidget(
+                              color: Colors.white,
+                              textcolor: grey,
+                              radius: 100,
+                              fontSize: 12,
+                              width: 60,
+                              height: 25,
+                              label: 'Facts',
+                              onPressed: () {},
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

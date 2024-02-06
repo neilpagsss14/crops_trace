@@ -1,7 +1,6 @@
 import 'package:crop_traceability/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
-import 'package:flutter_carousel_slider/carousel_slider_indicators.dart';
 
 class AboutUs extends StatefulWidget {
   const AboutUs({super.key});
@@ -19,7 +18,7 @@ class _AboutUsState extends State<AboutUs> {
       'about_3.jpeg',
     ];
     return Scaffold(
-      backgroundColor: Colors.green,
+      backgroundColor: Colors.green.shade600,
       appBar: AppBar(
           backgroundColor: Colors.white,
           centerTitle: true,

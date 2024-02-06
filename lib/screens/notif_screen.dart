@@ -12,7 +12,7 @@ class _NotifScreenState extends State<NotifScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green,
+      backgroundColor: Colors.green.shade600,
       appBar: AppBar(
           backgroundColor: Colors.white,
           centerTitle: true,
