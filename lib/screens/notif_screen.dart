@@ -24,6 +24,7 @@ class _NotifScreenState extends State<NotifScreen> {
             return Padding(
               padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
               child: Card(
+                color: Colors.white,
                 elevation: 10,
                 child: ListTile(
                   title: TextBold(
@@ -32,6 +33,10 @@ class _NotifScreenState extends State<NotifScreen> {
                       color: Colors.black),
                   subtitle: TextBold(
                       text: '1 minute ago', fontSize: 12, color: Colors.grey),
+                  leading: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.person),
+                      iconSize: 40),
                   trailing: IconButton(
                     onPressed: (() {}),
                     icon: const Icon(
