@@ -1,3 +1,4 @@
+import 'package:crop_traceability/screens/page_screen.dart';
 import 'package:crop_traceability/screens/main_menu_screen.dart';
 import 'package:crop_traceability/widgets/button_widget.dart';
 import 'package:crop_traceability/widgets/text_widget.dart';
@@ -106,7 +107,7 @@ class _SignInState extends State<SignIn> {
                   label: 'Log in',
                   onPressed: () {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => const MainMenu()));
+                        builder: (context) => const HomeScreen()));
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: TextRegular(
                             text: 'Successfully Log in',
