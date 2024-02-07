@@ -1,7 +1,4 @@
-import 'package:crop_traceability/screens/main_menu_screen.dart';
-import 'package:crop_traceability/screens/sign_in_screen.dart';
 import 'package:crop_traceability/screens/splash_screen.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 void main() {

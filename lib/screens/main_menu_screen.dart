@@ -39,184 +39,193 @@ class _MainMenuState extends State<MainMenu> {
             backgroundColor: Colors.white,
             title: TextBold(
                 text: 'Berna Crop', fontSize: 25, color: Colors.black)),
-        body: Column(
-          children: [
-            const SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  TextBold(
-                      text: 'Hello! Welcome Back Customer',
-                      fontSize: 20,
-                      color: Colors.white),
-                  Expanded(child: Container()),
-                  const Icon(
-                    Icons.person,
-                    size: 45,
-                  )
-                ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 10,
               ),
-            ),
-            SizedBox(
-              height: 200,
-              child: CarouselSlider.builder(
-                  unlimitedMode: true,
-                  slideBuilder: (index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(left: 15, right: 15),
-                      child: Container(
-                        height: 150,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          image: DecorationImage(
-                              image: AssetImage(
-                                  'assets/images/${imageLinks[index]}'),
-                              fit: BoxFit.cover),
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    TextBold(
+                        text: 'Hello! Welcome Back Customer',
+                        fontSize: 20,
+                        color: Colors.white),
+                    Expanded(child: Container()),
+                    const Icon(
+                      Icons.person,
+                      size: 45,
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 200,
+                child: CarouselSlider.builder(
+                    unlimitedMode: true,
+                    slideBuilder: (index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 15, right: 15),
+                        child: Container(
+                          height: 150,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            image: DecorationImage(
+                                image: AssetImage(
+                                    'assets/images/${imageLinks[index]}'),
+                                fit: BoxFit.cover),
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                  enableAutoSlider: true,
-                  scrollPhysics: const BouncingScrollPhysics(),
-                  slideIndicator: CircularSlideIndicator(
-                    indicatorRadius: 3,
-                    currentIndicatorColor: Colors.white,
-                    indicatorBackgroundColor: Colors.grey,
-                    padding: const EdgeInsets.only(bottom: 32),
-                  ),
-                  itemCount: 5),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: 150,
-                decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.only(
-                        topRight: Radius.circular(60),
-                        topLeft: Radius.circular(20),
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20)),
-                    image: DecorationImage(
-                        fit: BoxFit.fitWidth,
-                        colorFilter: ColorFilter.mode(
-                            Colors.white.withOpacity(0.8), BlendMode.dstATop),
-                        image: const AssetImage('assets/images/docu_6.jpg'))),
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 25),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: ButtonWidget(
-                          label: 'Book a Delivery',
-                          onPressed: () {},
-                          color: Colors.white,
-                          textcolor: Colors.red,
-                          fontSize: 15,
-                          radius: 200,
-                          height: 30,
-                          width: 30,
-                        ),
-                      )
-                    ],
+                      );
+                    },
+                    enableAutoSlider: true,
+                    scrollPhysics: const BouncingScrollPhysics(),
+                    slideIndicator: CircularSlideIndicator(
+                      indicatorRadius: 3,
+                      currentIndicatorColor: Colors.white,
+                      indicatorBackgroundColor: Colors.grey,
+                      padding: const EdgeInsets.only(bottom: 32),
+                    ),
+                    itemCount: 5),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 150,
+                  decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(60),
+                          topLeft: Radius.circular(20),
+                          bottomLeft: Radius.circular(20),
+                          bottomRight: Radius.circular(20)),
+                      image: DecorationImage(
+                          fit: BoxFit.fitWidth,
+                          colorFilter: ColorFilter.mode(
+                              Colors.white.withOpacity(0.8), BlendMode.dstATop),
+                          image: const AssetImage('assets/images/docu_6.jpg'))),
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.only(right: 25, left: 10, top: 10),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: ButtonWidget(
+                            label: 'Book a Delivery',
+                            onPressed: () {},
+                            color: Colors.white,
+                            textcolor: Colors.grey,
+                            fontSize: 15,
+                            radius: 200,
+                            height: 30,
+                            width: MediaQuery.of(context).size.width / 5,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 12),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Card(
-                    elevation: 10,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Container(
-                      height: 125,
-                      width: MediaQuery.of(context).size.width / 2.25,
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(10),
-                        image: const DecorationImage(
-                            image: AssetImage(
-                              'assets/images/recent.jpg',
-                            ),
-                            fit: BoxFit.cover),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Align(
-                            alignment: Alignment.center,
-                            child: ButtonWidget(
-                              color: Colors.white,
-                              textcolor: grey,
-                              radius: 100,
-                              fontSize: 12,
-                              width: 60,
-                              height: 25,
-                              label: 'Recent Deliveries',
-                              onPressed: () {},
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Card(
-                    elevation: 10,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Container(
-                      height: 125,
-                      width: MediaQuery.of(context).size.width / 2.25,
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(10),
-                        image: const DecorationImage(
-                            opacity: 50,
-                            image: AssetImage(
-                              'assets/images/facts.jpg',
-                            ),
-                            fit: BoxFit.cover),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Align(
-                            alignment: Alignment.center,
-                            child: ButtonWidget(
-                              color: Colors.white,
-                              textcolor: grey,
-                              radius: 100,
-                              fontSize: 12,
-                              width: 60,
-                              height: 25,
-                              label: 'Facts',
-                              onPressed: () {},
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
+              const SizedBox(
+                height: 10,
               ),
-            ),
-          ],
+              Padding(
+                padding: const EdgeInsets.only(left: 12),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Card(
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Container(
+                        height: 125,
+                        width: MediaQuery.of(context).size.width / 2.25,
+                        decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                              image: const AssetImage(
+                                'assets/images/recent.jpg',
+                              ),
+                              colorFilter: ColorFilter.mode(
+                                  Colors.white.withOpacity(0.8),
+                                  BlendMode.dstATop),
+                              fit: BoxFit.cover),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Align(
+                              alignment: Alignment.center,
+                              child: ButtonWidget(
+                                color: Colors.white,
+                                textcolor: grey,
+                                radius: 100,
+                                fontSize: 12,
+                                width: 60,
+                                height: 25,
+                                label: 'Recent Deliveries',
+                                onPressed: () {},
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Card(
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Container(
+                        height: 125,
+                        width: MediaQuery.of(context).size.width / 2.25,
+                        decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                              opacity: 50,
+                              image: const AssetImage(
+                                'assets/images/facts.jpg',
+                              ),
+                              colorFilter: ColorFilter.mode(
+                                  Colors.white.withOpacity(0.8),
+                                  BlendMode.dstATop),
+                              fit: BoxFit.cover),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Align(
+                              alignment: Alignment.center,
+                              child: ButtonWidget(
+                                color: Colors.white,
+                                textcolor: grey,
+                                radius: 100,
+                                fontSize: 12,
+                                width: 60,
+                                height: 25,
+                                label: 'Facts',
+                                onPressed: () {},
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

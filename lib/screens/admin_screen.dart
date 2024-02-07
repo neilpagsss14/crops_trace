@@ -1,19 +1,18 @@
-import 'package:crop_traceability/screens/admin_screen.dart';
 import 'package:crop_traceability/screens/page_screen.dart';
-import 'package:crop_traceability/screens/main_menu_screen.dart';
+import 'package:crop_traceability/screens/sign_in_screen.dart';
 import 'package:crop_traceability/widgets/button_widget.dart';
 import 'package:crop_traceability/widgets/text_widget.dart';
 import 'package:crop_traceability/widgets/textfield_widget.dart';
 import 'package:flutter/material.dart';
 
-class SignIn extends StatefulWidget {
-  const SignIn({super.key});
+class AdminScreen extends StatefulWidget {
+  const AdminScreen({super.key});
 
   @override
-  State<SignIn> createState() => _SignInState();
+  State<AdminScreen> createState() => _AdminScreenState();
 }
 
-class _SignInState extends State<SignIn> {
+class _AdminScreenState extends State<AdminScreen> {
   final _formKey = GlobalKey<FormState>();
   bool _obscureText = true;
 
@@ -27,7 +26,6 @@ class _SignInState extends State<SignIn> {
 
   final passwordController = TextEditingController();
   final emailController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -58,7 +56,7 @@ class _SignInState extends State<SignIn> {
               const SizedBox(
                 height: 10,
               ),
-              TextBold(text: 'Farmer', fontSize: 20, color: Colors.white),
+              TextBold(text: 'Admin', fontSize: 20, color: Colors.white),
               const SizedBox(
                 height: 35,
               ),
@@ -126,11 +124,19 @@ class _SignInState extends State<SignIn> {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => const AdminScreen()));
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => const SignIn()));
                 },
-                child: TextRegular(
-                    text: 'Log in as Admin', fontSize: 15, color: Colors.white),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.arrow_back),
+                    TextRegular(
+                        text: 'Back to Farmer',
+                        fontSize: 15,
+                        color: Colors.white),
+                  ],
+                ),
               )
             ],
           ),

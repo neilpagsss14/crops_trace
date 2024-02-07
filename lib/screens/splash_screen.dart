@@ -41,8 +41,8 @@ class _SplashScreenState extends State<SplashScreen>
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/images/crop.png',
-                height: 200,
+                'assets/images/magna.png',
+                height: 150,
               ),
               TextBold(text: 'Berna Crop', fontSize: 45, color: Colors.black),
             ],

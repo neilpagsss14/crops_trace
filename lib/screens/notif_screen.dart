@@ -18,37 +18,51 @@ class _NotifScreenState extends State<NotifScreen> {
           centerTitle: true,
           title: TextBold(
               text: 'Notifications', fontSize: 25, color: Colors.black)),
-      body: Expanded(
-        child: SizedBox(
-          child: ListView.builder(itemBuilder: ((context, index) {
-            return Padding(
-              padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
-              child: Card(
-                color: Colors.white,
-                elevation: 10,
-                child: ListTile(
-                  title: TextBold(
-                      text: 'Admin has received your bookings',
-                      fontSize: 16,
-                      color: Colors.black),
-                  subtitle: TextBold(
-                      text: '1 minute ago', fontSize: 12, color: Colors.grey),
-                  leading: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.person),
-                      iconSize: 40),
-                  trailing: IconButton(
-                    onPressed: (() {}),
-                    icon: const Icon(
-                      Icons.delete,
-                      color: Colors.red,
+      body: Column(
+        children: [
+          Expanded(
+            child: SizedBox(
+              child: ListView.builder(itemBuilder: ((context, index) {
+                return Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
+                  child: Card(
+                    color: Colors.white,
+                    elevation: 10,
+                    child: ListTile(
+                      title: TextBold(
+                          text: 'Admin has received your bookings',
+                          fontSize: 16,
+                          color: Colors.black),
+                      subtitle: TextBold(
+                          text: '1 minute ago',
+                          fontSize: 12,
+                          color: Colors.grey),
+                      leading: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.person),
+                          iconSize: 40),
+                      trailing: IconButton(
+                        onPressed: (() {}),
+                        icon: const Icon(
+                          Icons.delete,
+                          color: Colors.red,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-            );
-          })),
-        ),
+                );
+              })),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.white,
+            ),
+            child: TextRegular(
+                text: 'Mark all as read', fontSize: 15, color: Colors.green),
+          )
+        ],
       ),
     );
   }
