@@ -12,26 +12,30 @@ class ButtonWidget extends StatelessWidget {
   final Color? color;
   final Color? textcolor;
 
-  const ButtonWidget(
-      {super.key,
-      required this.label,
-      required this.onPressed,
-      this.textcolor = Colors.green,
-      this.width = double.maxFinite,
-      this.fontSize = 30,
-      this.height = 50,
-      this.radius = 25,
-      this.opacity = 0.6,
-      this.color = const Color.fromARGB(255, 233, 228, 228)});
+  const ButtonWidget({
+    super.key,
+    required this.label,
+    required this.onPressed,
+    this.textcolor = Colors.green,
+    this.width = double.maxFinite,
+    this.fontSize = 30,
+    this.height = 50,
+    this.radius = 25,
+    this.opacity = 0.6,
+    this.color = const Color.fromARGB(255, 233, 228, 228),
+  });
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(radius!)),
-        minWidth: width,
-        height: height,
-        color: color,
-        onPressed: onPressed,
-        child: TextBold(text: label, fontSize: fontSize!, color: textcolor!));
+    return Padding(
+      padding: const EdgeInsets.only(left: 12, top: 10),
+      child: MaterialButton(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(radius!)),
+          minWidth: width,
+          height: height,
+          color: color,
+          onPressed: onPressed,
+          child: TextBold(text: label, fontSize: fontSize!, color: textcolor!)),
+    );
   }
 }

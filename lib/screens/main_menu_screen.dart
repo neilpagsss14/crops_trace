@@ -108,27 +108,23 @@ class _MainMenuState extends State<MainMenu> {
                           colorFilter: ColorFilter.mode(
                               Colors.white.withOpacity(0.8), BlendMode.dstATop),
                           image: const AssetImage('assets/images/docu_6.jpg'))),
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.only(right: 25, left: 10, top: 10),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: ButtonWidget(
-                            label: 'Book a Delivery',
-                            onPressed: () {},
-                            color: Colors.white,
-                            textcolor: Colors.grey,
-                            fontSize: 15,
-                            radius: 200,
-                            height: 30,
-                            width: MediaQuery.of(context).size.width / 5,
-                          ),
-                        )
-                      ],
-                    ),
+                  child: Column(
+                    // mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: ButtonWidget(
+                          label: 'Book a Delivery',
+                          onPressed: () {},
+                          color: Colors.white,
+                          textcolor: Colors.grey,
+                          fontSize: 15,
+                          radius: 200,
+                          height: 30,
+                          width: MediaQuery.of(context).size.width / 5,
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ),
