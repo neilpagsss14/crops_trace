@@ -1,5 +1,5 @@
 import 'package:crop_traceability/screens/page_screen.dart';
-import 'package:crop_traceability/screens/sign_in_screen.dart';
+import 'package:crop_traceability/screens/login_screen.dart';
 import 'package:crop_traceability/widgets/button_widget.dart';
 import 'package:crop_traceability/widgets/text_widget.dart';
 import 'package:crop_traceability/widgets/textfield_widget.dart';
@@ -130,7 +130,7 @@ class _AdminScreenState extends State<AdminScreen> {
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => const SignIn()));
+                      MaterialPageRoute(builder: (context) => const LogIn()));
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

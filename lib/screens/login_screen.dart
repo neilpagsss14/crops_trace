@@ -5,14 +5,14 @@ import 'package:crop_traceability/widgets/text_widget.dart';
 import 'package:crop_traceability/widgets/textfield_widget.dart';
 import 'package:flutter/material.dart';
 
-class SignIn extends StatefulWidget {
-  const SignIn({super.key});
+class LogIn extends StatefulWidget {
+  const LogIn({super.key});
 
   @override
-  State<SignIn> createState() => _SignInState();
+  State<LogIn> createState() => _LogInState();
 }
 
-class _SignInState extends State<SignIn> {
+class _LogInState extends State<LogIn> {
   final _formKey = GlobalKey<FormState>();
   bool _obscureText = true;
 

@@ -1,3 +1,4 @@
+import 'package:crop_traceability/utils/colors.dart';
 import 'package:crop_traceability/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
@@ -18,7 +19,7 @@ class _AboutUsState extends State<AboutUs> {
       'about_3.jpeg',
     ];
     return Scaffold(
-      backgroundColor: Colors.green.shade600,
+      backgroundColor: background,
       appBar: AppBar(
         backgroundColor: Colors.white,
         centerTitle: true,

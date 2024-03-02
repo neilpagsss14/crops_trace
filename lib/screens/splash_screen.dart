@@ -1,4 +1,4 @@
-import 'package:crop_traceability/screens/sign_in_screen.dart';
+import 'package:crop_traceability/screens/login_screen.dart';
 import 'package:crop_traceability/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const SignIn()));
+          MaterialPageRoute(builder: (context) => const LogIn()));
     });
   }
 

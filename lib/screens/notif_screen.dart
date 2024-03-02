@@ -1,3 +1,4 @@
+import 'package:crop_traceability/utils/colors.dart';
 import 'package:crop_traceability/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,7 @@ class _NotifScreenState extends State<NotifScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green.shade600,
+      backgroundColor: background,
       appBar: AppBar(
         backgroundColor: Colors.white,
         centerTitle: true,

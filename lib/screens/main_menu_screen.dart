@@ -1,4 +1,5 @@
 import 'package:crop_traceability/screens/delivery_screen.dart';
+import 'package:crop_traceability/utils/colors.dart';
 import 'package:crop_traceability/widgets/button_widget.dart';
 import 'package:crop_traceability/widgets/color_widget.dart';
 import 'package:crop_traceability/widgets/text_widget.dart';
@@ -36,7 +37,7 @@ class _MainMenuState extends State<MainMenu> {
         backgroundColor: const Color(0xff5F8D4E),
         appBar: AppBar(
           centerTitle: true,
-          backgroundColor: Colors.white,
+          backgroundColor: primary,
           title: TextWidget(
             text: 'Berna Crop',
             fontSize: 25,
@@ -121,26 +122,33 @@ class _MainMenuState extends State<MainMenu> {
                           colorFilter: ColorFilter.mode(
                               Colors.white.withOpacity(0.8), BlendMode.dstATop),
                           image: const AssetImage('assets/images/docu_6.jpg'))),
-                  child: Column(
-                    children: [
-                      TextWidget(
-                        text: 'Crops Delivery',
-                        fontSize: 30,
-                        fontFamily: 'Regular',
-                      ),
-                      IconButton(
-                          iconSize: 60,
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const DeliveryScreen()));
-                          },
-                          icon: const Icon(Icons.arrow_circle_right_rounded)),
-                    ],
+                  child: Align(
+                    alignment: Alignment.bottomRight,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextWidget(
+                          text: 'Crops Delivery',
+                          color: primary,
+                          fontSize: 30,
+                          fontFamily: 'Bold',
+                        ),
+                        IconButton(
+                            iconSize: 60,
+                            color: primary,
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) =>
+                                      const DeliveryScreen()));
+                            },
+                            icon: const Icon(Icons.arrow_circle_right)),
+                      ],
+                    ),
                   ),
                 ),
               ),
               const SizedBox(
-                height: 10,
+                height: 20,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 12),
@@ -153,7 +161,7 @@ class _MainMenuState extends State<MainMenu> {
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Container(
-                        height: 125,
+                        height: 150,
                         width: MediaQuery.of(context).size.width / 2.25,
                         decoration: BoxDecoration(
                           color: Colors.transparent,
@@ -193,7 +201,7 @@ class _MainMenuState extends State<MainMenu> {
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Container(
-                        height: 125,
+                        height: 150,
                         width: MediaQuery.of(context).size.width / 2.25,
                         decoration: BoxDecoration(
                           color: Colors.transparent,
