@@ -35,7 +35,8 @@ class ButtonWidget extends StatelessWidget {
           height: height,
           color: color,
           onPressed: onPressed,
-          child: TextBold(text: label, fontSize: fontSize!, color: textcolor!)),
+          child:
+              TextWidget(text: label, fontSize: fontSize!, color: textcolor!)),
     );
   }
 }

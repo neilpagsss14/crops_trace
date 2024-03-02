@@ -1,4 +1,3 @@
-import 'package:crop_traceability/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldWidget extends StatefulWidget {
@@ -57,8 +56,8 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           textCapitalization: widget.textCapitalization!,
           keyboardType: widget.inputType,
           decoration: InputDecoration(
-            prefixIcon: const Icon(Icons.key),
-            prefixIconColor: Colors.green,
+            prefixIcon: const Icon(Icons.email),
+            prefixIconColor: const Color(0xff5F8D4E),
             suffixIcon: widget.showEye! == true
                 ? IconButton(
                     onPressed: () {

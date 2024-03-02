@@ -28,8 +28,7 @@ class _AdminScreenState extends State<AdminScreen> {
   final emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
       backgroundColor: Colors.grey,
       body: Form(
         key: _formKey,
@@ -56,7 +55,11 @@ class _AdminScreenState extends State<AdminScreen> {
               const SizedBox(
                 height: 10,
               ),
-              TextBold(text: 'Admin', fontSize: 20, color: Colors.white),
+              TextWidget(
+                text: 'Admin',
+                fontSize: 30,
+                fontFamily: 'Regular',
+              ),
               const SizedBox(
                 height: 35,
               ),
@@ -114,12 +117,14 @@ class _AdminScreenState extends State<AdminScreen> {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
                         builder: (context) => const HomeScreen()));
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: TextRegular(
-                            text: 'Successfully Log in',
-                            fontSize: 12,
-                            color: Colors.white)));
+                      content: TextWidget(
+                        text: 'Successfully Log in ',
+                        fontSize: 12,
+                        fontFamily: 'Bold',
+                      ),
+                    ));
                   },
-                  color: Colors.green.shade600,
+                  color: const Color(0xff5F8D4E),
                 ),
               ),
               TextButton(
@@ -131,10 +136,11 @@ class _AdminScreenState extends State<AdminScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Icon(Icons.arrow_back),
-                    TextRegular(
-                        text: 'Back to Farmer',
-                        fontSize: 15,
-                        color: Colors.white),
+                    TextWidget(
+                      text: 'Back to Farmer',
+                      fontSize: 15,
+                      fontFamily: 'Bold',
+                    ),
                   ],
                 ),
               )
@@ -142,6 +148,6 @@ class _AdminScreenState extends State<AdminScreen> {
           ),
         ),
       ),
-    ));
+    );
   }
 }

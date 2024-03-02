@@ -14,10 +14,15 @@ class _NotifScreenState extends State<NotifScreen> {
     return Scaffold(
       backgroundColor: Colors.green.shade600,
       appBar: AppBar(
-          backgroundColor: Colors.white,
-          centerTitle: true,
-          title: TextBold(
-              text: 'Notifications', fontSize: 25, color: Colors.black)),
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        title: TextWidget(
+          text: "Notifications",
+          fontSize: 25,
+          color: Colors.black,
+          fontFamily: 'Bold',
+        ),
+      ),
       body: Column(
         children: [
           Expanded(
@@ -29,14 +34,16 @@ class _NotifScreenState extends State<NotifScreen> {
                     color: Colors.white,
                     elevation: 10,
                     child: ListTile(
-                      title: TextBold(
-                          text: 'Admin has received your bookings',
-                          fontSize: 16,
-                          color: Colors.black),
-                      subtitle: TextBold(
-                          text: '1 minute ago',
-                          fontSize: 12,
-                          color: Colors.grey),
+                      title: TextWidget(
+                        text: "Admin has received your bookings",
+                        fontSize: 16,
+                        color: Colors.black,
+                      ),
+                      subtitle: TextWidget(
+                        text: "1 min ago",
+                        fontSize: 12,
+                        color: Colors.grey,
+                      ),
                       leading: IconButton(
                           onPressed: () {},
                           icon: const Icon(Icons.person),
@@ -55,12 +62,18 @@ class _NotifScreenState extends State<NotifScreen> {
             ),
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              dispose();
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.white,
             ),
-            child: TextRegular(
-                text: 'Mark all as read', fontSize: 15, color: Colors.green),
+            child: TextWidget(
+              text: "Mark all as read",
+              fontSize: 15,
+              color: Colors.green,
+              fontFamily: 'Regular',
+            ),
           )
         ],
       ),

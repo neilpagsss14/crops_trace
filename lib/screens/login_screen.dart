@@ -1,6 +1,5 @@
 import 'package:crop_traceability/screens/admin_screen.dart';
 import 'package:crop_traceability/screens/page_screen.dart';
-import 'package:crop_traceability/screens/main_menu_screen.dart';
 import 'package:crop_traceability/widgets/button_widget.dart';
 import 'package:crop_traceability/widgets/text_widget.dart';
 import 'package:crop_traceability/widgets/textfield_widget.dart';
@@ -30,8 +29,7 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
       backgroundColor: Colors.grey,
       body: Form(
         key: _formKey,
@@ -58,14 +56,19 @@ class _SignInState extends State<SignIn> {
               const SizedBox(
                 height: 10,
               ),
-              TextBold(text: 'Farmer', fontSize: 20, color: Colors.white),
+              TextWidget(
+                text: "Farmer",
+                fontSize: 20,
+                color: Colors.white,
+                fontFamily: 'Bold',
+              ),
               const SizedBox(
                 height: 35,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 15, right: 15),
                 child: TextFieldWidget(
-                  hint: 'Enter Email',
+                  hint: 'Username',
                   isObscure: false,
                   showEye: false,
                   controller: emailController,
@@ -116,12 +119,15 @@ class _SignInState extends State<SignIn> {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
                         builder: (context) => const HomeScreen()));
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: TextRegular(
-                            text: 'Successfully Log in',
-                            fontSize: 12,
-                            color: Colors.white)));
+                      content: TextWidget(
+                        text: "Successfully Log in",
+                        fontSize: 12,
+                        color: Colors.white,
+                        fontFamily: 'Regular',
+                      ),
+                    ));
                   },
-                  color: Colors.green.shade600,
+                  color: const Color(0xff5F8D4E),
                 ),
               ),
               TextButton(
@@ -129,13 +135,17 @@ class _SignInState extends State<SignIn> {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (context) => const AdminScreen()));
                 },
-                child: TextRegular(
-                    text: 'Log in as Admin', fontSize: 15, color: Colors.white),
+                child: TextWidget(
+                  text: "Log in as Admin",
+                  fontSize: 15,
+                  color: Colors.white,
+                  fontFamily: 'Regular',
+                ),
               )
             ],
           ),
         ),
       ),
-    ));
+    );
   }
 }

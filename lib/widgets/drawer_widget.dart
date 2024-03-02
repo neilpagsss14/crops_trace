@@ -1,4 +1,4 @@
-import 'package:crop_traceability/screens/sign_in_screen.dart';
+import 'package:crop_traceability/screens/login_screen.dart';
 import 'package:crop_traceability/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -33,10 +33,11 @@ class DrawerWidget extends StatelessWidget {
                       const SizedBox(
                         width: 10,
                       ),
-                      TextRegular(
+                      TextWidget(
                         text: '09669420116',
                         fontSize: 14,
                         color: Colors.black,
+                        fontFamily: 'Regular',
                       ),
                     ],
                   ),
@@ -54,10 +55,11 @@ class DrawerWidget extends StatelessWidget {
                       const SizedBox(
                         width: 10,
                       ),
-                      TextRegular(
+                      TextWidget(
                         text: 'neilpagara50@gmail.com',
                         fontSize: 14,
                         color: Colors.black,
+                        fontFamily: 'Regular',
                       ),
                     ],
                   ),
@@ -65,10 +67,11 @@ class DrawerWidget extends StatelessWidget {
               ),
               accountName: Padding(
                 padding: const EdgeInsets.only(top: 10),
-                child: TextBold(
+                child: TextWidget(
                   text: 'Neil Clifford Pagara',
                   fontSize: 18,
                   color: Colors.black,
+                  fontFamily: 'Regular',
                 ),
               ),
               currentAccountPicture: const Padding(
@@ -86,64 +89,68 @@ class DrawerWidget extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.home),
-              title: TextRegular(
+              title: TextWidget(
                 text: 'Home',
                 fontSize: 12,
-                color: Colors.grey,
+                fontFamily: 'Regular',
               ),
               onTap: () {
                 Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => const SignIn()));
+                    MaterialPageRoute(builder: (context) => const LogIn()));
               },
             ),
             ListTile(
               leading: const Icon(
                 Icons.info_outline_rounded,
               ),
-              title: TextRegular(
+              title: TextWidget(
                 text: 'About us',
                 fontSize: 12,
                 color: Colors.grey,
+                fontFamily: 'Regular',
               ),
               onTap: () {
                 Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => const SignIn()));
+                    MaterialPageRoute(builder: (context) => const LogIn()));
               },
             ),
             ListTile(
               leading: const Icon(
                 Icons.password_rounded,
               ),
-              title: TextRegular(
+              title: TextWidget(
                 text: 'Change Password',
                 fontSize: 12,
                 color: Colors.grey,
+                fontFamily: 'Regular',
               ),
               onTap: () {
                 Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => const SignIn()));
+                    MaterialPageRoute(builder: (context) => const LogIn()));
               },
             ),
             ListTile(
               leading: const Icon(
                 Icons.account_box_rounded,
               ),
-              title: TextRegular(
+              title: TextWidget(
                 text: "User's Profile",
                 fontSize: 12,
                 color: Colors.grey,
+                fontFamily: 'Regular',
               ),
               onTap: () {
                 Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => const SignIn()));
+                    MaterialPageRoute(builder: (context) => const LogIn()));
               },
             ),
             ListTile(
               leading: const Icon(Icons.logout),
-              title: TextRegular(
-                text: 'Logout',
+              title: TextWidget(
+                text: "Logout",
                 fontSize: 12,
                 color: Colors.grey,
+                fontFamily: 'Regular',
               ),
               onTap: () {
                 showDialog(
@@ -174,7 +181,7 @@ class DrawerWidget extends StatelessWidget {
                               onPressed: () {
                                 Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
-                                        builder: (context) => const SignIn()));
+                                        builder: (context) => const LogIn()));
                               },
                               child: const Text(
                                 'Continue',

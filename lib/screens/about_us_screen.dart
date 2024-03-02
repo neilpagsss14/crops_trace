@@ -20,9 +20,14 @@ class _AboutUsState extends State<AboutUs> {
     return Scaffold(
       backgroundColor: Colors.green.shade600,
       appBar: AppBar(
-          backgroundColor: Colors.white,
-          centerTitle: true,
-          title: TextBold(text: 'About us', fontSize: 25, color: Colors.black)),
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        title: TextWidget(
+          text: 'About Us',
+          fontSize: 25,
+          fontFamily: 'Bold',
+        ),
+      ),
       body: Column(
         children: [
           Padding(

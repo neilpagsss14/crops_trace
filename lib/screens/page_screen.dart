@@ -1,9 +1,6 @@
 import 'package:crop_traceability/screens/about_us_screen.dart';
 import 'package:crop_traceability/screens/main_menu_screen.dart';
 import 'package:crop_traceability/screens/notif_screen.dart';
-import 'package:crop_traceability/screens/sign_in_screen.dart';
-import 'package:crop_traceability/screens/splash_screen.dart';
-import 'package:crop_traceability/widgets/drawer_widget.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -34,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: Colors.green.shade600,
+        backgroundColor: const Color(0xff5F8D4E),
         buttonBackgroundColor: Colors.transparent,
         color: Colors.white,
         height: 60,

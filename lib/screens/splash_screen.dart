@@ -44,7 +44,12 @@ class _SplashScreenState extends State<SplashScreen>
                 'assets/images/magna.png',
                 height: 150,
               ),
-              TextBold(text: 'Berna Crop', fontSize: 45, color: Colors.black),
+              TextWidget(
+                text: "Berna Crop",
+                fontSize: 45,
+                color: Colors.black,
+                fontFamily: 'Bold',
+              ),
             ],
           ),
         ),

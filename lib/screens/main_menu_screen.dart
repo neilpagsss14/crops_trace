@@ -1,8 +1,7 @@
+import 'package:crop_traceability/screens/delivery_screen.dart';
 import 'package:crop_traceability/widgets/button_widget.dart';
 import 'package:crop_traceability/widgets/color_widget.dart';
-
 import 'package:crop_traceability/widgets/text_widget.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 
@@ -14,6 +13,7 @@ class MainMenu extends StatefulWidget {
 }
 
 class _MainMenuState extends State<MainMenu> {
+  final name = "Neil";
   final _pageController = PageController();
 
   @override
@@ -33,12 +33,16 @@ class _MainMenuState extends State<MainMenu> {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.green.shade600,
+        backgroundColor: const Color(0xff5F8D4E),
         appBar: AppBar(
-            centerTitle: true,
-            backgroundColor: Colors.white,
-            title: TextBold(
-                text: 'Berna Crop', fontSize: 25, color: Colors.black)),
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          title: TextWidget(
+            text: 'Berna Crop',
+            fontSize: 25,
+            fontFamily: 'Bold',
+          ),
+        ),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -50,15 +54,24 @@ class _MainMenuState extends State<MainMenu> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    TextBold(
-                        text: 'Hello! Welcome Back Customer',
-                        fontSize: 20,
-                        color: Colors.white),
+                    TextWidget(
+                      text: 'Hello Farmer $name',
+                      fontSize: 25,
+                      fontFamily: 'Bold',
+                    ),
                     Expanded(child: Container()),
-                    const Icon(
-                      Icons.person,
-                      size: 45,
-                    )
+                    Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                      ),
+                      padding: const EdgeInsets.all(7),
+                      child: const Icon(
+                        Icons.person,
+                        size: 35,
+                        color: Colors.black,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -109,21 +122,19 @@ class _MainMenuState extends State<MainMenu> {
                               Colors.white.withOpacity(0.8), BlendMode.dstATop),
                           image: const AssetImage('assets/images/docu_6.jpg'))),
                   child: Column(
-                    // mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: ButtonWidget(
-                          label: 'Book a Delivery',
-                          onPressed: () {},
-                          color: Colors.white,
-                          textcolor: Colors.grey,
-                          fontSize: 15,
-                          radius: 200,
-                          height: 30,
-                          width: MediaQuery.of(context).size.width / 5,
-                        ),
-                      )
+                      TextWidget(
+                        text: 'Crops Delivery',
+                        fontSize: 30,
+                        fontFamily: 'Regular',
+                      ),
+                      IconButton(
+                          iconSize: 60,
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const DeliveryScreen()));
+                          },
+                          icon: const Icon(Icons.arrow_circle_right_rounded)),
                     ],
                   ),
                 ),
