@@ -1,3 +1,4 @@
+import 'package:crop_traceability/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldWidget extends StatefulWidget {
@@ -13,6 +14,7 @@ class TextFieldWidget extends StatefulWidget {
   late Color? borderColor;
   late Color? hintColor;
   late double? radius;
+  final IconData? prefixIcon;
   final String? Function(String?)? validator; // Add validator parameter
 
   final TextCapitalization? textCapitalization;
@@ -33,6 +35,7 @@ class TextFieldWidget extends StatefulWidget {
     this.textCapitalization = TextCapitalization.sentences,
     this.inputType = TextInputType.text,
     this.validator, // Add validator parameter
+    this.prefixIcon,
   });
 
   @override
@@ -56,8 +59,9 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           textCapitalization: widget.textCapitalization!,
           keyboardType: widget.inputType,
           decoration: InputDecoration(
-            prefixIcon: const Icon(Icons.email),
-            prefixIconColor: const Color(0xff5F8D4E),
+            prefixIcon:
+                widget.prefixIcon != null ? Icon(widget.prefixIcon) : null,
+            prefixIconColor: background,
             suffixIcon: widget.showEye! == true
                 ? IconButton(
                     onPressed: () {
