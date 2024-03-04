@@ -153,12 +153,12 @@ class _MainMenuState extends State<MainMenu> {
               Padding(
                 padding: const EdgeInsets.only(left: 12),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Card(
                       elevation: 10,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                       child: Container(
                         height: 150,

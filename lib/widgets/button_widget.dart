@@ -14,17 +14,18 @@ class ButtonWidget extends StatelessWidget {
   final Color? textcolor;
 
   ButtonWidget(
-      {super.key,
+      {Key? key,
       required this.label,
       required this.onPressed,
-      this.textcolor = Colors.black,
+      this.textcolor,
       this.width = double.maxFinite,
       this.fontSize = 30,
       this.height = 50,
       this.radius = 25,
       this.opacity = 0.6,
       this.color = const Color.fromARGB(255, 233, 228, 228),
-      this.fontFamily = 'Regular'});
+      this.fontFamily = 'Regular'})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -40,7 +41,7 @@ class ButtonWidget extends StatelessWidget {
               fontFamily: fontFamily,
               text: label,
               fontSize: fontSize!,
-              color: textcolor!)),
+              color: textcolor)),
     );
   }
 }
