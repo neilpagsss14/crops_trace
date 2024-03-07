@@ -15,42 +15,48 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Widget buildCard(String imagePath, String cropName) {
+    Widget buildClickableCard(String imagePath, String cropName) {
       return Expanded(
-        child: SizedBox(
-          height: 200,
-          child: Card(
-            color: primary,
-            elevation: 5,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.vertical(
-                      top: Radius.circular(15),
+        child: GestureDetector(
+          onTap: () {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: TextWidget(text: 'Hello Arvy Cntnen', fontSize: 20)));
+          },
+          child: SizedBox(
+            height: 200,
+            child: Card(
+              color: primary,
+              elevation: 5,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(15),
+                      ),
+                      child: Image.asset(
+                        imagePath,
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                    child: Image.asset(
-                      imagePath,
-                      fit: BoxFit.cover,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 8,
+                      bottom: 8,
+                    ),
+                    child: TextWidget(
+                      text: cropName,
+                      fontSize: 25,
+                      fontFamily: 'Bold',
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: 8,
-                    bottom: 8,
-                  ),
-                  child: TextWidget(
-                    text: cropName,
-                    fontSize: 25,
-                    fontFamily: 'Bold',
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -139,33 +145,41 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                     children: [
                       Row(
                         children: [
-                          buildCard('assets/images/cabbage.webp', 'Cabbage'),
+                          buildClickableCard(
+                              'assets/images/cabbage.webp', 'Cabbage'),
                           const SizedBox(width: 8),
-                          buildCard('assets/images/eggplant.png', 'Eggplant'),
+                          buildClickableCard(
+                              'assets/images/eggplant.png', 'Eggplant'),
                         ],
                       ),
                       const SizedBox(height: 40),
                       Row(
                         children: [
-                          buildCard('assets/images/carrots.png', 'Carrots'),
+                          buildClickableCard(
+                              'assets/images/carrots.png', 'Carrots'),
                           const SizedBox(width: 8),
-                          buildCard('assets/images/potato.png', 'Potato'),
+                          buildClickableCard(
+                              'assets/images/potato.png', 'Potato'),
                         ],
                       ),
                       const SizedBox(height: 40),
                       Row(
                         children: [
-                          buildCard('assets/images/pechay.png', 'Pechay'),
+                          buildClickableCard(
+                              'assets/images/pechay.png', 'Pechay'),
                           const SizedBox(width: 8),
-                          buildCard('assets/images/onions.png', 'Onions'),
+                          buildClickableCard(
+                              'assets/images/onions.png', 'Onions'),
                         ],
                       ),
                       const SizedBox(height: 40),
                       Row(
                         children: [
-                          buildCard('assets/images/garlic.png', 'Garlic'),
+                          buildClickableCard(
+                              'assets/images/garlic.png', 'Garlic'),
                           const SizedBox(width: 8),
-                          buildCard('assets/images/ginger.png', 'Ginger'),
+                          buildClickableCard(
+                              'assets/images/ginger.png', 'Ginger'),
                         ],
                       ),
                     ],
