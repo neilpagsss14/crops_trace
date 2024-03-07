@@ -37,6 +37,7 @@ dependencies:
   flutter_carousel_slider:
   curved_navigation_bar: ^1.0.3
   fluttertoast:
+  firebase_core: ^2.26.0
 
 dev_dependencies:
   flutter_test:
