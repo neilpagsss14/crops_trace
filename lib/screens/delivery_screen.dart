@@ -127,7 +127,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         fontSize: 20,
                         width: 10,
                         height: 45,
-                        label: 'Submit',
+                        label: 'submit',
                         textcolor: background,
                         onPressed: () {},
                       ),
