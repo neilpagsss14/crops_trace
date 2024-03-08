@@ -29,7 +29,7 @@ class ButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 12, top: 10),
+      padding: const EdgeInsets.only(left: 10, right: 5, top: 10),
       child: MaterialButton(
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(radius!)),

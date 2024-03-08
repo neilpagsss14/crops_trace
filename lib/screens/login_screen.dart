@@ -128,7 +128,7 @@ class _LogInState extends State<LogIn> {
                   height: 15,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15),
+                  padding: const EdgeInsets.only(left: 5, right: 15),
                   child: ButtonWidget(
                     label: 'Log in',
                     fontSize: 20,
@@ -167,11 +167,11 @@ class _LogInState extends State<LogIn> {
 
     if (user != null) {
       print("Success");
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const HomeScreen()));
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: TextWidget(
               text: 'Successfully Log in', fontSize: 12, color: primary)));
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const HomeScreen()));
     } else {
       print("Error");
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
