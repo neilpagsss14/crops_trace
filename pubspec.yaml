@@ -36,8 +36,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_carousel_slider:
   curved_navigation_bar: ^1.0.3
-  fluttertoast:
   firebase_core: ^2.26.0
+  firebase_auth: ^4.17.7
+  cloud_firestore: ^4.15.7
+  firebase_storage: ^11.6.8
 
 dev_dependencies:
   flutter_test:

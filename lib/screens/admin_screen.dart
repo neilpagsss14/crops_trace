@@ -1,9 +1,12 @@
+import 'package:crop_traceability/auth/firebase_auth.dart';
 import 'package:crop_traceability/screens/page_screen.dart';
 import 'package:crop_traceability/screens/login_screen.dart';
+import 'package:crop_traceability/screens/splash_screen.dart';
 import 'package:crop_traceability/utils/colors.dart';
 import 'package:crop_traceability/widgets/button_widget.dart';
 import 'package:crop_traceability/widgets/text_widget.dart';
 import 'package:crop_traceability/widgets/textfield_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class AdminScreen extends StatefulWidget {
@@ -14,6 +17,9 @@ class AdminScreen extends StatefulWidget {
 }
 
 class _AdminScreenState extends State<AdminScreen> {
+  final FirebaseAuthService _auth = FirebaseAuthService();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool _obscureText = true;
 
@@ -74,7 +80,7 @@ class _AdminScreenState extends State<AdminScreen> {
                     hint: 'Admin Username',
                     isObscure: false,
                     showEye: false,
-                    controller: emailController,
+                    controller: _emailController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter a password';
@@ -93,11 +99,11 @@ class _AdminScreenState extends State<AdminScreen> {
                 Padding(
                   padding: const EdgeInsets.only(left: 15, right: 15),
                   child: TextFieldWidget(
+                    controller: _passwordController,
                     prefixIcon: Icons.key_outlined,
                     hint: 'Enter Admin Password',
                     isObscure: true,
                     showEye: true,
-                    controller: passwordController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter a password';
@@ -120,15 +126,7 @@ class _AdminScreenState extends State<AdminScreen> {
                     fontSize: 20,
                     textcolor: Colors.white,
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => const HomeScreen()));
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: TextWidget(
-                          text: 'Successfully Log in ',
-                          fontSize: 12,
-                          fontFamily: 'Bold',
-                        ),
-                      ));
+                      _signIn();
                     },
                     color: const Color(0xff5F8D4E),
                   ),
@@ -156,5 +154,29 @@ class _AdminScreenState extends State<AdminScreen> {
         ),
       ),
     );
+  }
+
+  void _signIn() async {
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    User? user = await _auth.signInWithEmailAndPassword(email, password);
+
+    if (user != null) {
+      print("Success");
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: TextWidget(
+              text: 'Successfully Log in', fontSize: 12, color: primary)));
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const SplashScreen()));
+    } else {
+      print("Error");
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: TextWidget(
+        text: 'Wrong Credentials',
+        fontSize: 12,
+        color: primary,
+      )));
+    }
   }
 }

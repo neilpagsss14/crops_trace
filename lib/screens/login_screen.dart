@@ -1,9 +1,12 @@
+import 'package:crop_traceability/auth/firebase_auth.dart';
 import 'package:crop_traceability/screens/admin_screen.dart';
+import 'package:crop_traceability/screens/main_menu_screen.dart';
 import 'package:crop_traceability/screens/page_screen.dart';
 import 'package:crop_traceability/utils/colors.dart';
 import 'package:crop_traceability/widgets/button_widget.dart';
 import 'package:crop_traceability/widgets/text_widget.dart';
 import 'package:crop_traceability/widgets/textfield_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LogIn extends StatefulWidget {
@@ -14,19 +17,27 @@ class LogIn extends StatefulWidget {
 }
 
 class _LogInState extends State<LogIn> {
+  final FirebaseAuthService _auth = FirebaseAuthService();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   final _formKey = GlobalKey<FormState>();
   bool _obscureText = true;
 
-  late String _password;
+  // late String _password;
 
   void _toggle() {
     setState(() {
       _obscureText = !_obscureText;
     });
   }
-
-  final passwordController = TextEditingController();
-  final emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -123,16 +134,7 @@ class _LogInState extends State<LogIn> {
                     fontSize: 20,
                     textcolor: Colors.white,
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => const HomeScreen()));
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: TextWidget(
-                          text: "Successfully Log in",
-                          fontSize: 12,
-                          color: Colors.white,
-                          fontFamily: 'Regular',
-                        ),
-                      ));
+                      _signIn();
                     },
                     color: background,
                   ),
@@ -155,5 +157,29 @@ class _LogInState extends State<LogIn> {
         ),
       ),
     );
+  }
+
+  void _signIn() async {
+    String email = emailController.text;
+    String password = passwordController.text;
+
+    User? user = await _auth.signInWithEmailAndPassword(email, password);
+
+    if (user != null) {
+      print("Success");
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: TextWidget(
+              text: 'Successfully Log in', fontSize: 12, color: primary)));
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const HomeScreen()));
+    } else {
+      print("Error");
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: TextWidget(
+        text: 'Wrong Credentials',
+        fontSize: 12,
+        color: primary,
+      )));
+    }
   }
 }
