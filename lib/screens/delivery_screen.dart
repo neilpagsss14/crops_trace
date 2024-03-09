@@ -1,5 +1,6 @@
 import 'package:crop_traceability/utils/colors.dart';
 import 'package:crop_traceability/widgets/button_widget.dart';
+import 'package:crop_traceability/widgets/input_quantity.dart';
 import 'package:crop_traceability/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,7 @@ class DeliveryScreen extends StatefulWidget {
 }
 
 class _DeliveryScreenState extends State<DeliveryScreen> {
+  String dropdownValue = 'crates';
   final name = "Arvy Cntnen";
 
   @override
@@ -19,8 +21,61 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
       return Expanded(
         child: GestureDetector(
           onTap: () {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: TextWidget(text: 'Hello Arvy Cntnen', fontSize: 20)));
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return StatefulBuilder(
+                  builder: (BuildContext context, StateSetter setState) {
+                    return AlertDialog(
+                      title: const Text('Enter Quantity Information'),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          InputQty(
+                            maxVal: double.maxFinite,
+                            initVal: 0,
+                            onQtyChanged: (val) {
+                              setState(() {});
+                            },
+                            fontSize: 20,
+                          ),
+                          DropdownButton<String>(
+                            value: dropdownValue,
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                dropdownValue = newValue!;
+                              });
+                            },
+                            items: <String>['crates', 'sacks']
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          ),
+                        ],
+                      ),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('Close'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            // Perform save operation using dropdownValue
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('Save'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+            );
           },
           child: SizedBox(
             height: 200,
@@ -127,7 +182,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         fontSize: 20,
                         width: 10,
                         height: 45,
-                        label: 'submit',
+                        label: 'Checkout Crops',
                         textcolor: background,
                         onPressed: () {},
                       ),
