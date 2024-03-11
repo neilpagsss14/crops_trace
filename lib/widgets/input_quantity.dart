@@ -5,14 +5,16 @@ class InputQty extends StatefulWidget {
   final int initVal;
   final Function(int) onQtyChanged;
   final double fontSize; // Add this property
+  final bool isVisible; // Add this property
 
   const InputQty({
-    super.key,
+    Key? key,
     required this.maxVal,
     required this.initVal,
     required this.onQtyChanged,
     this.fontSize = 14, // Default font size
-  });
+    this.isVisible = true,
+  }) : super(key: key);
 
   @override
   _InputQtyState createState() => _InputQtyState();
@@ -25,6 +27,18 @@ class _InputQtyState extends State<InputQty> {
   void initState() {
     super.initState();
     _cropsController.text = widget.initVal.toString();
+  }
+
+  @override
+  void dispose() {
+    _cropsController.dispose();
+    super.dispose();
+  }
+
+  void _clearField() {
+    setState(() {
+      _cropsController.clear();
+    });
   }
 
   @override

@@ -4,6 +4,14 @@ import 'package:crop_traceability/widgets/input_quantity.dart';
 import 'package:crop_traceability/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
+class Order {
+  final String cropName;
+  final int quantity;
+  final String unit;
+
+  Order({required this.cropName, required this.quantity, required this.unit});
+}
+
 class DeliveryScreen extends StatefulWidget {
   const DeliveryScreen({Key? key}) : super(key: key);
 
@@ -14,6 +22,9 @@ class DeliveryScreen extends StatefulWidget {
 class _DeliveryScreenState extends State<DeliveryScreen> {
   String dropdownValue = 'crates';
   final name = "Arvy Cntnen";
+  final List<Order> orders = [];
+
+  int selectedQuantity = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +46,9 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                             maxVal: double.maxFinite,
                             initVal: 0,
                             onQtyChanged: (val) {
-                              setState(() {});
+                              setState(() {
+                                selectedQuantity = val;
+                              });
                             },
                             fontSize: 20,
                           ),
@@ -65,7 +78,12 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         ),
                         TextButton(
                           onPressed: () {
-                            // Perform save operation using dropdownValue
+                            orders.add(Order(
+                              cropName: cropName,
+                              quantity:
+                                  selectedQuantity, // Use selectedQuantity
+                              unit: dropdownValue,
+                            ));
                             Navigator.of(context).pop();
                           },
                           child: const Text('Save'),
@@ -129,6 +147,58 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
             color: Colors.black,
             fontFamily: 'Bold',
           ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: TextWidget(
+                        text: 'Order Details',
+                        fontSize: 20,
+                        fontFamily: 'Bold',
+                      ),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: orders.map((order) {
+                          return ListTile(
+                            title: TextWidget(
+                              text: order.cropName,
+                              fontSize: 20,
+                              fontFamily: "bold",
+                            ),
+                            subtitle: TextWidget(
+                              text: "Quantity: ${order.quantity} ${order.unit}",
+                              fontSize: 15,
+                              fontFamily: "bold",
+                            ),
+                            trailing: IconButton(
+                              icon: const Icon(Icons.delete),
+                              onPressed: () {
+                                setState(() {
+                                  orders.remove(order);
+                                });
+                              },
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('Close'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              icon: const Icon(Icons.shopping_bag),
+            ),
+          ],
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
