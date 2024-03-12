@@ -43,7 +43,6 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           InputQty(
-                            
                             maxVal: double.maxFinite,
                             initVal: 0,
                             onQtyChanged: (val) {
@@ -152,6 +151,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
             IconButton(
               onPressed: () {
                 showDialog(
+                  barrierDismissible: false,
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
@@ -160,44 +160,112 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         fontSize: 20,
                         fontFamily: 'Bold',
                       ),
-                      content: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: orders.map((order) {
-                          return ListTile(
-                            title: TextWidget(
-                              text: order.cropName,
-                              fontSize: 20,
-                              fontFamily: "bold",
-                            ),
-                            subtitle: TextWidget(
-                              text: "Quantity: ${order.quantity} ${order.unit}",
-                              fontSize: 15,
-                              fontFamily: "bold",
-                            ),
-                            trailing: IconButton(
-                              icon: const Icon(Icons.delete),
-                              onPressed: () {
-                                setState(() {
-                                  orders.remove(order);
-                                });
-                              },
-                            ),
-                          );
-                        }).toList(),
+                      content: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: orders.map((order) {
+                            return ListTile(
+                              title: TextWidget(
+                                text: order.cropName,
+                                fontSize: 20,
+                                fontFamily: "bold",
+                              ),
+                              subtitle: TextWidget(
+                                text: "${order.quantity} ${order.unit}",
+                                fontSize: 15,
+                                fontFamily: "bold",
+                              ),
+                              trailing: IconButton(
+                                icon: const Icon(Icons.delete),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  setState(() {
+                                    orders.remove(order);
+                                  });
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content:
+                                          Text('Deleted ${order.cropName}'),
+                                      duration: const Duration(seconds: 3),
+                                      action: SnackBarAction(
+                                        label: 'Undo',
+                                        onPressed: () {
+                                          setState(() {
+                                            orders.add(order);
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
+                          }).toList(),
+                        ),
                       ),
                       actions: <Widget>[
                         TextButton(
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child: const Text('Close'),
+                          child: TextWidget(
+                            color: background,
+                            text: 'Close',
+                            fontSize: 15,
+                            fontFamily: "Bold",
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            showDialog(
+                                barrierDismissible: false,
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: TextWidget(
+                                      text:
+                                          'Are you sure you want to proceed checkout?',
+                                      fontSize: 20,
+                                      fontFamily: "Bold",
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: TextWidget(
+                                          color: background,
+                                          text: 'Close',
+                                          fontSize: 15,
+                                          fontFamily: "Bold",
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {},
+                                        child: TextWidget(
+                                          color: background,
+                                          text: 'OK',
+                                          fontSize: 15,
+                                          fontFamily: "Bold",
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                });
+                          },
+                          child: TextWidget(
+                            color: background,
+                            text: 'Checkout Crops',
+                            fontSize: 15,
+                            fontFamily: "Bold",
+                          ),
                         ),
                       ],
                     );
                   },
                 );
               },
-              icon: const Icon(Icons.shopping_bag),
+              icon: const Icon(Icons.shopping_basket_rounded),
             ),
           ],
         ),
@@ -239,7 +307,6 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                     children: [
                       ButtonWidget(
                         color: primary,
-                        width: 10,
                         fontSize: 20,
                         height: 45,
                         textcolor: background,
@@ -247,16 +314,16 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         label: 'Add Crops',
                         onPressed: () {},
                       ),
-                      ButtonWidget(
-                        color: primary,
-                        fontFamily: 'Bold',
-                        fontSize: 20,
-                        width: 10,
-                        height: 45,
-                        label: 'Checkout Crops',
-                        textcolor: background,
-                        onPressed: () {},
-                      ),
+                      // ButtonWidget(
+                      //   color: primary,
+                      //   fontFamily: 'Bold',
+                      //   fontSize: 20,
+                      //   width: 10,
+                      //   height: 45,
+                      //   label: 'Checkout Crops',
+                      //   textcolor: background,
+                      //   onPressed: () {},
+                      // ),
                     ],
                   ),
                   const SizedBox(height: 20),
