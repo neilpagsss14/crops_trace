@@ -3,6 +3,7 @@ import 'package:crop_traceability/widgets/button_widget.dart';
 import 'package:crop_traceability/widgets/input_quantity.dart';
 import 'package:crop_traceability/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Order {
   final String cropName;
@@ -20,6 +21,23 @@ class DeliveryScreen extends StatefulWidget {
 }
 
 class _DeliveryScreenState extends State<DeliveryScreen> {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  Future<void> _sendOrdersToFirestore() async {
+    CollectionReference ordersCollection = _firestore.collection('orders');
+    for (Order order in orders) {
+      await ordersCollection.add({
+        'cropName': order.cropName,
+        'quantity': order.quantity,
+        'unit': order.unit,
+      });
+    }
+    // Clear orders list after sending to Firestore
+    setState(() {
+      orders.clear();
+    });
+  }
+
   String dropdownValue = 'crates';
   final name = "Arvy Cntnen";
   final List<Order> orders = [];
@@ -241,7 +259,9 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                         ),
                                       ),
                                       TextButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          _sendOrdersToFirestore();
+                                        },
                                         child: TextWidget(
                                           color: background,
                                           text: 'OK',
