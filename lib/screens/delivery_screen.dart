@@ -43,6 +43,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           InputQty(
+                            
                             maxVal: double.maxFinite,
                             initVal: 0,
                             onQtyChanged: (val) {
