@@ -1,7 +1,15 @@
+import 'package:crop_traceability/firebase_options.dart';
+import 'package:crop_traceability/screens/main_menu_screen.dart';
+import 'package:crop_traceability/screens/page_screen.dart';
 import 'package:crop_traceability/screens/splash_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp());
 }
 

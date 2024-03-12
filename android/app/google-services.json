@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "1024774252752",
-    "project_id": "crop-traceability",
-    "storage_bucket": "crop-traceability.appspot.com"
+    "project_number": "772916826036",
+    "project_id": "crops-trace",
+    "storage_bucket": "crops-trace.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1024774252752:android:b376afa465048c3f4156d5",
+        "mobilesdk_app_id": "1:772916826036:android:d026c7593cbe12ee81ace1",
         "android_client_info": {
           "package_name": "com.example.crop_traceability"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyD-YgIUmPLDvAFqyvlubCvr_Vv_ZmwA63E"
+          "current_key": "AIzaSyBwx-kDNgW40sr9qGVlagrHyLEM3pEvfGY"
         }
       ],
       "services": {

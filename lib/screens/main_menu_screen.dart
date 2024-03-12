@@ -1,8 +1,11 @@
 import 'package:crop_traceability/screens/delivery_screen.dart';
+import 'package:crop_traceability/screens/login_screen.dart';
 import 'package:crop_traceability/utils/colors.dart';
 import 'package:crop_traceability/widgets/button_widget.dart';
 import 'package:crop_traceability/widgets/color_widget.dart';
 import 'package:crop_traceability/widgets/text_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 
@@ -20,6 +23,7 @@ class _MainMenuState extends State<MainMenu> {
   @override
   void dispose() {
     _pageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -36,6 +40,22 @@ class _MainMenuState extends State<MainMenu> {
       child: Scaffold(
         backgroundColor: const Color(0xff5F8D4E),
         appBar: AppBar(
+          actions: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(right: 20),
+              child: GestureDetector(
+                onTap: () {
+                  FirebaseAuth.instance.signOut();
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => const LogIn()));
+                },
+                child: const Icon(
+                  Icons.login_outlined,
+                  size: 25,
+                ),
+              ),
+            )
+          ],
           centerTitle: true,
           backgroundColor: primary,
           title: TextWidget(
