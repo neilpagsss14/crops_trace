@@ -17,7 +17,7 @@ class MainMenu extends StatefulWidget {
 }
 
 class _MainMenuState extends State<MainMenu> {
-  final name = "Neil";
+  final name = "Farmer";
   final _pageController = PageController();
 
   @override
@@ -76,7 +76,7 @@ class _MainMenuState extends State<MainMenu> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     TextWidget(
-                      text: 'Hello Farmer $name',
+                      text: 'Hello $name',
                       fontSize: 25,
                       fontFamily: 'Bold',
                     ),

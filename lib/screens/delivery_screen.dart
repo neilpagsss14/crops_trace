@@ -21,6 +21,16 @@ class DeliveryScreen extends StatefulWidget {
 }
 
 class _DeliveryScreenState extends State<DeliveryScreen> {
+  void addCropToOrders(String cropName, int quantity, String unit) {
+    setState(() {
+      orders.add(Order(
+        cropName: cropName,
+        quantity: quantity,
+        unit: unit,
+      ));
+    });
+  }
+
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<void> _sendOrdersToFirestore() async {
@@ -39,7 +49,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
   }
 
   String dropdownValue = 'crates';
-  final name = "Arvy Cntnen";
+  final name = "Farmer";
   final List<Order> orders = [];
 
   int selectedQuantity = 0;
@@ -96,12 +106,8 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         ),
                         TextButton(
                           onPressed: () {
-                            orders.add(Order(
-                              cropName: cropName,
-                              quantity:
-                                  selectedQuantity, // Use selectedQuantity
-                              unit: dropdownValue,
-                            ));
+                            addCropToOrders(
+                                cropName, selectedQuantity, dropdownValue);
                             Navigator.of(context).pop();
                           },
                           child: const Text('Save'),
@@ -235,6 +241,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         ),
                         TextButton(
                           onPressed: () {
+                            Navigator.of(context).pop();
                             showDialog(
                                 barrierDismissible: false,
                                 context: context,
@@ -260,7 +267,20 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                       ),
                                       TextButton(
                                         onPressed: () {
-                                          _sendOrdersToFirestore();
+                                          if (orders.isNotEmpty) {
+                                            _sendOrdersToFirestore();
+                                          } else {
+                                            // Show a message that orders list is empty
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              const SnackBar(
+                                                content: Text(
+                                                    'No crops added for checkout.'),
+                                                duration: Duration(seconds: 3),
+                                              ),
+                                            );
+                                          }
+                                          Navigator.of(context).pop();
                                         },
                                         child: TextWidget(
                                           color: background,
@@ -314,7 +334,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         width: 10,
                       ),
                       TextWidget(
-                        text: 'Hello Farmer $name',
+                        text: 'Hello $name',
                         fontSize: 20,
                         color: primary,
                         fontFamily: 'Bold',
@@ -323,10 +343,11 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                   ),
                   const SizedBox(height: 10),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ButtonWidget(
                         color: primary,
+                        width: 20,
                         fontSize: 20,
                         height: 45,
                         textcolor: background,
@@ -334,16 +355,6 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         label: 'Add Crops',
                         onPressed: () {},
                       ),
-                      // ButtonWidget(
-                      //   color: primary,
-                      //   fontFamily: 'Bold',
-                      //   fontSize: 20,
-                      //   width: 10,
-                      //   height: 45,
-                      //   label: 'Checkout Crops',
-                      //   textcolor: background,
-                      //   onPressed: () {},
-                      // ),
                     ],
                   ),
                   const SizedBox(height: 20),
