@@ -13,11 +13,8 @@ Future addOrder(username, usernumber, useraddress, qty, unit, userprofile,
     'qty': qty,
     'unit': unit,
     'dateTime': DateTime.now(),
-    'status': 'Pending',
     'userId': FirebaseAuth.instance.currentUser!.uid,
     'userprofile': userprofile,
-    'orderType': orderType,
-    'mode': mode,
   };
 
   await docUser.set(json);

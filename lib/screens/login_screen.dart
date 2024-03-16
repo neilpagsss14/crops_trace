@@ -86,6 +86,7 @@ class _LogInState extends State<LogIn> {
                   padding: const EdgeInsets.only(left: 15, right: 15),
                   child: TextFieldWidget(
                     prefixIcon: Icons.email,
+                    textCapitalization: TextCapitalization.none,
                     hint: 'Username',
                     isObscure: false,
                     showEye: false,

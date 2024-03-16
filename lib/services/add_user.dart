@@ -12,7 +12,6 @@ Future addUser(farmName, number, address, email) async {
     'address': address,
     'email': email,
     'id': docUser.id,
-    'notif': [],
     'profilePicture': 'https://cdn-icons-png.flaticon.com/256/149/149071.png',
     'type': 'User'
   };

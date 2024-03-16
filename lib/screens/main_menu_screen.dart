@@ -48,9 +48,51 @@ class _MainMenuState extends State<MainMenu> {
               padding: const EdgeInsets.only(right: 20),
               child: GestureDetector(
                 onTap: () {
-                  FirebaseAuth.instance.signOut();
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => const LogIn()));
+                  showDialog(
+                      barrierDismissible: false,
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: TextWidget(
+                            text: 'Are you sure you want to exit?',
+                            fontSize: 20,
+                            fontFamily: "Bold",
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: TextWidget(
+                                color: background,
+                                text: 'Close',
+                                fontSize: 15,
+                                fontFamily: "Bold",
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                FirebaseAuth.instance.signOut();
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (context) => const LogIn()));
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content: TextWidget(
+                                            text: 'Successfully Log out',
+                                            fontSize: 12,
+                                            color: primary)));
+                              },
+                              child: TextWidget(
+                                color: background,
+                                text: 'OK',
+                                fontSize: 15,
+                                fontFamily: "Bold",
+                              ),
+                            ),
+                          ],
+                        );
+                      });
                 },
                 child: const Icon(
                   Icons.login_outlined,
