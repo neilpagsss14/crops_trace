@@ -205,11 +205,7 @@ class _MainMenuState extends State<MainMenu> {
                           onPressed: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) => DeliveryScreen(
-                                  farmName: farmNameController.text,
-                                  address: addressController.text,
-                                  contactNumber: contactnumberController.text,
-                                ),
+                                builder: (context) => const DeliveryScreen(),
                               ),
                             );
                           },

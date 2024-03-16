@@ -9,49 +9,28 @@ class Order {
   final String cropName;
   final int quantity;
   final String unit;
-  final String address;
-  final String farmName;
-  final String contactNumber;
 
-  Order(
-      {required this.cropName,
-      required this.quantity,
-      required this.unit,
-      required this.address,
-      required this.farmName,
-      required this.contactNumber});
+  Order({
+    required this.cropName,
+    required this.quantity,
+    required this.unit,
+  });
 }
 
 class DeliveryScreen extends StatefulWidget {
-  final String farmName;
-  final String address;
-  final String contactNumber;
-
-  const DeliveryScreen({
-    Key? key,
-    required this.farmName,
-    required this.address,
-    required this.contactNumber,
-  }) : super(key: key);
+  const DeliveryScreen({Key? key}) : super(key: key);
 
   @override
   State<DeliveryScreen> createState() => _DeliveryScreenState();
 }
 
 class _DeliveryScreenState extends State<DeliveryScreen> {
-  final farmNameController = TextEditingController();
-  final addressController = TextEditingController();
-  final contactnumberController = TextEditingController();
-  void addCropToOrders(String cropName, int quantity, String unit,
-      String address, String farmName, String contactNumber) {
+  void addCropToOrders(String cropName, int quantity, String unit) {
     setState(() {
       orders.add(Order(
         cropName: cropName,
         quantity: quantity,
         unit: unit,
-        address: address,
-        farmName: farmName,
-        contactNumber: contactNumber,
       ));
     });
   }
@@ -60,14 +39,13 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
 
   Future<void> _sendOrdersToFirestore() async {
     CollectionReference ordersCollection = _firestore.collection('orders');
+    DateTime now = DateTime.now();
     for (Order order in orders) {
       await ordersCollection.add({
         'cropName': order.cropName,
         'quantity': order.quantity,
         'unit': order.unit,
-        'farmName': widget.farmName, // Include farmName
-        'address': widget.address, // Include address
-        'number': widget.contactNumber
+        'checkoutDateTime': now,
       });
     }
     // Clear orders list after sending to Firestore
@@ -138,9 +116,6 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                               cropName,
                               selectedQuantity,
                               dropdownValue,
-                              addressController.text,
-                              farmNameController.text,
-                              contactnumberController.text,
                             );
                             Navigator.of(context).pop();
                           },
