@@ -2,6 +2,7 @@ import 'package:crop_traceability/auth/firebase_auth.dart';
 import 'package:crop_traceability/screens/admin_screen.dart';
 import 'package:crop_traceability/screens/main_menu_screen.dart';
 import 'package:crop_traceability/screens/page_screen.dart';
+import 'package:crop_traceability/screens/signup_screen.dart';
 import 'package:crop_traceability/utils/colors.dart';
 import 'package:crop_traceability/widgets/button_widget.dart';
 import 'package:crop_traceability/widgets/text_widget.dart';
@@ -139,6 +140,31 @@ class _LogInState extends State<LogIn> {
                     color: background,
                   ),
                 ),
+                const SizedBox(
+                  height: 15,
+                ),
+                SizedBox(
+                  height: 30,
+                  child: VerticalDivider(
+                    color: primary,
+                    thickness: 3,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 5, right: 15),
+                  child: ButtonWidget(
+                    radius: 100,
+                    fontSize: 20,
+                    textcolor: Colors.white,
+                    color: background,
+                    fontFamily: "Regular",
+                    label: 'Signup',
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => const SignupScreen()));
+                    },
+                  ),
+                ),
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -150,6 +176,9 @@ class _LogInState extends State<LogIn> {
                     color: Colors.white,
                     fontFamily: 'Bold',
                   ),
+                ),
+                const SizedBox(
+                  height: 20,
                 ),
               ],
             ),

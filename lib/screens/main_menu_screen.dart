@@ -5,7 +5,6 @@ import 'package:crop_traceability/widgets/button_widget.dart';
 import 'package:crop_traceability/widgets/color_widget.dart';
 import 'package:crop_traceability/widgets/text_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 
@@ -17,7 +16,11 @@ class MainMenu extends StatefulWidget {
 }
 
 class _MainMenuState extends State<MainMenu> {
-  final name = "Farmer";
+  final farmNameController = TextEditingController();
+
+  final addressController = TextEditingController();
+
+  final contactnumberController = TextEditingController();
   final _pageController = PageController();
 
   @override
@@ -76,7 +79,8 @@ class _MainMenuState extends State<MainMenu> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     TextWidget(
-                      text: 'Hello $name',
+                      color: primary,
+                      text: 'Hello Farmer ',
                       fontSize: 25,
                       fontFamily: 'Bold',
                     ),
@@ -154,14 +158,21 @@ class _MainMenuState extends State<MainMenu> {
                           fontFamily: 'Bold',
                         ),
                         IconButton(
-                            iconSize: 60,
-                            color: primary,
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) =>
-                                      const DeliveryScreen()));
-                            },
-                            icon: const Icon(Icons.arrow_circle_right)),
+                          iconSize: 60,
+                          color: primary,
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => DeliveryScreen(
+                                  farmName: farmNameController.text,
+                                  address: addressController.text,
+                                  contactNumber: contactnumberController.text,
+                                ),
+                              ),
+                            );
+                          },
+                          icon: const Icon(Icons.arrow_circle_right),
+                        ),
                       ],
                     ),
                   ),

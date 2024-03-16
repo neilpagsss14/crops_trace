@@ -9,24 +9,49 @@ class Order {
   final String cropName;
   final int quantity;
   final String unit;
+  final String address;
+  final String farmName;
+  final String contactNumber;
 
-  Order({required this.cropName, required this.quantity, required this.unit});
+  Order(
+      {required this.cropName,
+      required this.quantity,
+      required this.unit,
+      required this.address,
+      required this.farmName,
+      required this.contactNumber});
 }
 
 class DeliveryScreen extends StatefulWidget {
-  const DeliveryScreen({Key? key}) : super(key: key);
+  final String farmName;
+  final String address;
+  final String contactNumber;
+
+  const DeliveryScreen({
+    Key? key,
+    required this.farmName,
+    required this.address,
+    required this.contactNumber,
+  }) : super(key: key);
 
   @override
   State<DeliveryScreen> createState() => _DeliveryScreenState();
 }
 
 class _DeliveryScreenState extends State<DeliveryScreen> {
-  void addCropToOrders(String cropName, int quantity, String unit) {
+  final farmNameController = TextEditingController();
+  final addressController = TextEditingController();
+  final contactnumberController = TextEditingController();
+  void addCropToOrders(String cropName, int quantity, String unit,
+      String address, String farmName, String contactNumber) {
     setState(() {
       orders.add(Order(
         cropName: cropName,
         quantity: quantity,
         unit: unit,
+        address: address,
+        farmName: farmName,
+        contactNumber: contactNumber,
       ));
     });
   }
@@ -40,6 +65,9 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
         'cropName': order.cropName,
         'quantity': order.quantity,
         'unit': order.unit,
+        'farmName': widget.farmName, // Include farmName
+        'address': widget.address, // Include address
+        'number': widget.contactNumber
       });
     }
     // Clear orders list after sending to Firestore
@@ -107,7 +135,13 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         TextButton(
                           onPressed: () {
                             addCropToOrders(
-                                cropName, selectedQuantity, dropdownValue);
+                              cropName,
+                              selectedQuantity,
+                              dropdownValue,
+                              addressController.text,
+                              farmNameController.text,
+                              contactnumberController.text,
+                            );
                             Navigator.of(context).pop();
                           },
                           child: const Text('Save'),
@@ -347,6 +381,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                     children: [
                       ButtonWidget(
                         color: primary,
+                        // radius: 120,
                         width: 20,
                         fontSize: 20,
                         height: 45,
