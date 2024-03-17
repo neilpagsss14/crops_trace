@@ -1,20 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-Future addOrder(username, usernumber, useraddress, qty, unit, userprofile,
-    orderType, String mode) async {
+Future addOrder(cropName, farmName, number, address, qty, unit) async {
   final docUser = FirebaseFirestore.instance.collection('Orders').doc();
 
   final json = {
-    'username': username,
-    'usernumber': usernumber,
-    'useraddress': useraddress,
-    'id': docUser.id,
+    'cropName': cropName,
+    'farmName': farmName,
+    'usernumber': number,
+    'useraddress': address,
     'qty': qty,
     'unit': unit,
     'dateTime': DateTime.now(),
     'userId': FirebaseAuth.instance.currentUser!.uid,
-    'userprofile': userprofile,
   };
 
   await docUser.set(json);
