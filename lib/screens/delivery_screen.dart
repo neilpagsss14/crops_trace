@@ -18,13 +18,24 @@ class Order {
 }
 
 class DeliveryScreen extends StatefulWidget {
-  const DeliveryScreen({Key? key}) : super(key: key);
+  final String farmName;
+  final String contactNumber;
+  final String address;
+
+  const DeliveryScreen({
+    Key? key,
+    required this.farmName,
+    required this.contactNumber,
+    required this.address,
+  }) : super(key: key);
 
   @override
   State<DeliveryScreen> createState() => _DeliveryScreenState();
 }
 
 class _DeliveryScreenState extends State<DeliveryScreen> {
+  List<Order> orders = [];
+
   void addCropToOrders(String cropName, int quantity, String unit) {
     setState(() {
       orders.add(Order(
@@ -46,6 +57,9 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
         'quantity': order.quantity,
         'unit': order.unit,
         'checkoutDateTime': now,
+        'farmName': widget.farmName,
+        'contactNumber': widget.contactNumber,
+        'address': widget.address,
       });
     }
     // Clear orders list after sending to Firestore
@@ -53,10 +67,58 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
       orders.clear();
     });
   }
+// class Order {
+//   final String cropName;
+//   final int quantity;
+//   final String unit;
+
+//   Order({
+//     required this.cropName,
+//     required this.quantity,
+//     required this.unit,
+//   });
+// }
+
+// class DeliveryScreen extends StatefulWidget {
+//   const DeliveryScreen({Key? key}) : super(key: key);
+
+//   @override
+//   State<DeliveryScreen> createState() => _DeliveryScreenState();
+// }
+
+// class _DeliveryScreenState extends State<DeliveryScreen> {
+//   void addCropToOrders(String cropName, int quantity, String unit) {
+//     setState(() {
+//       orders.add(Order(
+//         cropName: cropName,
+//         quantity: quantity,
+//         unit: unit,
+//       ));
+//     });
+//   }
+
+//   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+//   Future<void> _sendOrdersToFirestore() async {
+//     CollectionReference ordersCollection = _firestore.collection('orders');
+//     DateTime now = DateTime.now();
+//     for (Order order in orders) {
+//       await ordersCollection.add({
+//         'cropName': order.cropName,
+//         'quantity': order.quantity,
+//         'unit': order.unit,
+//         'checkoutDateTime': now,
+//       });
+//     }
+//     // Clear orders list after sending to Firestore
+//     setState(() {
+//       orders.clear();
+//     });
+//   }
 
   String dropdownValue = 'crates';
   final name = "Farmer";
-  final List<Order> orders = [];
+  // final List<Order> orders = [];
 
   int selectedQuantity = 0;
 

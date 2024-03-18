@@ -1,3 +1,4 @@
+import 'package:crop_traceability/screens/delivery_screen.dart';
 import 'package:crop_traceability/screens/login_screen.dart';
 import 'package:crop_traceability/screens/page_screen.dart';
 import 'package:crop_traceability/services/add_user.dart';
@@ -229,6 +230,16 @@ class _SignupScreenState extends State<SignupScreen> {
 
       addUser(farmNameController.text, contactnumberController.text,
           addressController.text, emailController.text);
+
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => DeliveryScreen(
+            farmName: farmNameController.text,
+            address: addressController.text,
+            contactNumber: contactnumberController.text,
+          ),
+        ),
+      );
 
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
