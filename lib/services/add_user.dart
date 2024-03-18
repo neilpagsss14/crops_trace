@@ -13,7 +13,7 @@ Future addUser(farmName, number, address, email) async {
     'email': email,
     'id': docUser.id,
     'profilePicture': 'https://cdn-icons-png.flaticon.com/256/149/149071.png',
-    'type': 'User'
+    'type': 'User',
   };
 
   await docUser.set(json);
