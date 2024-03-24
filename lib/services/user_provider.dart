@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class UserProvider extends ChangeNotifier {
+class UserDataProvider extends ChangeNotifier {
   late String farmName;
   late String address;
   late String contactNumber;
