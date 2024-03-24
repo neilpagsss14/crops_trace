@@ -3,26 +3,122 @@ import 'package:crop_traceability/widgets/button_widget.dart';
 import 'package:crop_traceability/widgets/input_quantity.dart';
 import 'package:crop_traceability/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Order {
   final String cropName;
   final int quantity;
   final String unit;
 
-  Order({required this.cropName, required this.quantity, required this.unit});
+  Order({
+    required this.cropName,
+    required this.quantity,
+    required this.unit,
+  });
 }
 
 class DeliveryScreen extends StatefulWidget {
-  const DeliveryScreen({Key? key}) : super(key: key);
+  final String farmName;
+  final String contactNumber;
+  final String address;
+
+  const DeliveryScreen({
+    Key? key,
+    required this.farmName,
+    required this.contactNumber,
+    required this.address,
+  }) : super(key: key);
 
   @override
   State<DeliveryScreen> createState() => _DeliveryScreenState();
 }
 
 class _DeliveryScreenState extends State<DeliveryScreen> {
+  List<Order> orders = [];
+
+  void addCropToOrders(String cropName, int quantity, String unit) {
+    setState(() {
+      orders.add(Order(
+        cropName: cropName,
+        quantity: quantity,
+        unit: unit,
+      ));
+    });
+  }
+
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  Future<void> _sendOrdersToFirestore() async {
+    CollectionReference ordersCollection = _firestore.collection('orders');
+    DateTime now = DateTime.now();
+    for (Order order in orders) {
+      await ordersCollection.add({
+        'cropName': order.cropName,
+        'quantity': order.quantity,
+        'unit': order.unit,
+        'checkoutDateTime': now,
+        'farmName': widget.farmName,
+        'contactNumber': widget.contactNumber,
+        'address': widget.address,
+      });
+    }
+    // Clear orders list after sending to Firestore
+    setState(() {
+      orders.clear();
+    });
+  }
+// class Order {
+//   final String cropName;
+//   final int quantity;
+//   final String unit;
+
+//   Order({
+//     required this.cropName,
+//     required this.quantity,
+//     required this.unit,
+//   });
+// }
+
+// class DeliveryScreen extends StatefulWidget {
+//   const DeliveryScreen({Key? key}) : super(key: key);
+
+//   @override
+//   State<DeliveryScreen> createState() => _DeliveryScreenState();
+// }
+
+// class _DeliveryScreenState extends State<DeliveryScreen> {
+//   void addCropToOrders(String cropName, int quantity, String unit) {
+//     setState(() {
+//       orders.add(Order(
+//         cropName: cropName,
+//         quantity: quantity,
+//         unit: unit,
+//       ));
+//     });
+//   }
+
+//   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+//   Future<void> _sendOrdersToFirestore() async {
+//     CollectionReference ordersCollection = _firestore.collection('orders');
+//     DateTime now = DateTime.now();
+//     for (Order order in orders) {
+//       await ordersCollection.add({
+//         'cropName': order.cropName,
+//         'quantity': order.quantity,
+//         'unit': order.unit,
+//         'checkoutDateTime': now,
+//       });
+//     }
+//     // Clear orders list after sending to Firestore
+//     setState(() {
+//       orders.clear();
+//     });
+//   }
+
   String dropdownValue = 'crates';
-  final name = "Arvy Cntnen";
-  final List<Order> orders = [];
+  final name = "Farmer";
+  // final List<Order> orders = [];
 
   int selectedQuantity = 0;
 
@@ -43,7 +139,6 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           InputQty(
-                            
                             maxVal: double.maxFinite,
                             initVal: 0,
                             onQtyChanged: (val) {
@@ -79,12 +174,11 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         ),
                         TextButton(
                           onPressed: () {
-                            orders.add(Order(
-                              cropName: cropName,
-                              quantity:
-                                  selectedQuantity, // Use selectedQuantity
-                              unit: dropdownValue,
-                            ));
+                            addCropToOrders(
+                              cropName,
+                              selectedQuantity,
+                              dropdownValue,
+                            );
                             Navigator.of(context).pop();
                           },
                           child: const Text('Save'),
@@ -152,6 +246,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
             IconButton(
               onPressed: () {
                 showDialog(
+                  barrierDismissible: false,
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
@@ -160,44 +255,128 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         fontSize: 20,
                         fontFamily: 'Bold',
                       ),
-                      content: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: orders.map((order) {
-                          return ListTile(
-                            title: TextWidget(
-                              text: order.cropName,
-                              fontSize: 20,
-                              fontFamily: "bold",
-                            ),
-                            subtitle: TextWidget(
-                              text: "Quantity: ${order.quantity} ${order.unit}",
-                              fontSize: 15,
-                              fontFamily: "bold",
-                            ),
-                            trailing: IconButton(
-                              icon: const Icon(Icons.delete),
-                              onPressed: () {
-                                setState(() {
-                                  orders.remove(order);
-                                });
-                              },
-                            ),
-                          );
-                        }).toList(),
+                      content: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: orders.map((order) {
+                            return ListTile(
+                              title: TextWidget(
+                                text: order.cropName,
+                                fontSize: 20,
+                                fontFamily: "bold",
+                              ),
+                              subtitle: TextWidget(
+                                text: "${order.quantity} ${order.unit}",
+                                fontSize: 15,
+                                fontFamily: "bold",
+                              ),
+                              trailing: IconButton(
+                                icon: const Icon(Icons.delete),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  setState(() {
+                                    orders.remove(order);
+                                  });
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content:
+                                          Text('Deleted ${order.cropName}'),
+                                      duration: const Duration(seconds: 3),
+                                      action: SnackBarAction(
+                                        label: 'Undo',
+                                        onPressed: () {
+                                          setState(() {
+                                            orders.add(order);
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
+                          }).toList(),
+                        ),
                       ),
                       actions: <Widget>[
                         TextButton(
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child: const Text('Close'),
+                          child: TextWidget(
+                            color: background,
+                            text: 'Close',
+                            fontSize: 15,
+                            fontFamily: "Bold",
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            showDialog(
+                                barrierDismissible: false,
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: TextWidget(
+                                      text:
+                                          'Are you sure you want to proceed checkout?',
+                                      fontSize: 20,
+                                      fontFamily: "Bold",
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: TextWidget(
+                                          color: background,
+                                          text: 'Close',
+                                          fontSize: 15,
+                                          fontFamily: "Bold",
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          if (orders.isNotEmpty) {
+                                            _sendOrdersToFirestore();
+                                          } else {
+                                            // Show a message that orders list is empty
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              const SnackBar(
+                                                content: Text(
+                                                    'No crops added for checkout.'),
+                                                duration: Duration(seconds: 3),
+                                              ),
+                                            );
+                                          }
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: TextWidget(
+                                          color: background,
+                                          text: 'OK',
+                                          fontSize: 15,
+                                          fontFamily: "Bold",
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                });
+                          },
+                          child: TextWidget(
+                            color: background,
+                            text: 'Checkout Crops',
+                            fontSize: 15,
+                            fontFamily: "Bold",
+                          ),
                         ),
                       ],
                     );
                   },
                 );
               },
-              icon: const Icon(Icons.shopping_bag),
+              icon: const Icon(Icons.shopping_basket_rounded),
             ),
           ],
         ),
@@ -226,7 +405,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         width: 10,
                       ),
                       TextWidget(
-                        text: 'Hello Farmer $name',
+                        text: 'Hello $name',
                         fontSize: 20,
                         color: primary,
                         fontFamily: 'Bold',
@@ -235,26 +414,17 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                   ),
                   const SizedBox(height: 10),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ButtonWidget(
                         color: primary,
-                        width: 10,
+                        // radius: 120,
+                        width: 20,
                         fontSize: 20,
                         height: 45,
                         textcolor: background,
                         fontFamily: 'Bold',
                         label: 'Add Crops',
-                        onPressed: () {},
-                      ),
-                      ButtonWidget(
-                        color: primary,
-                        fontFamily: 'Bold',
-                        fontSize: 20,
-                        width: 10,
-                        height: 45,
-                        label: 'Checkout Crops',
-                        textcolor: background,
                         onPressed: () {},
                       ),
                     ],

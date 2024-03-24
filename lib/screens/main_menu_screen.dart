@@ -5,7 +5,6 @@ import 'package:crop_traceability/widgets/button_widget.dart';
 import 'package:crop_traceability/widgets/color_widget.dart';
 import 'package:crop_traceability/widgets/text_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 
@@ -17,7 +16,11 @@ class MainMenu extends StatefulWidget {
 }
 
 class _MainMenuState extends State<MainMenu> {
-  final name = "Neil";
+  final farmNameController = TextEditingController();
+
+  final addressController = TextEditingController();
+
+  final contactnumberController = TextEditingController();
   final _pageController = PageController();
 
   @override
@@ -45,9 +48,51 @@ class _MainMenuState extends State<MainMenu> {
               padding: const EdgeInsets.only(right: 20),
               child: GestureDetector(
                 onTap: () {
-                  FirebaseAuth.instance.signOut();
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => const LogIn()));
+                  showDialog(
+                      barrierDismissible: false,
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: TextWidget(
+                            text: 'Are you sure you want to exit?',
+                            fontSize: 20,
+                            fontFamily: "Bold",
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: TextWidget(
+                                color: background,
+                                text: 'Close',
+                                fontSize: 15,
+                                fontFamily: "Bold",
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                FirebaseAuth.instance.signOut();
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (context) => const LogIn()));
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content: TextWidget(
+                                            text: 'Successfully Log out',
+                                            fontSize: 12,
+                                            color: primary)));
+                              },
+                              child: TextWidget(
+                                color: background,
+                                text: 'OK',
+                                fontSize: 15,
+                                fontFamily: "Bold",
+                              ),
+                            ),
+                          ],
+                        );
+                      });
                 },
                 child: const Icon(
                   Icons.login_outlined,
@@ -76,7 +121,8 @@ class _MainMenuState extends State<MainMenu> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     TextWidget(
-                      text: 'Hello Farmer $name',
+                      color: primary,
+                      text: 'Hello Farmer ',
                       fontSize: 25,
                       fontFamily: 'Bold',
                     ),
@@ -154,14 +200,21 @@ class _MainMenuState extends State<MainMenu> {
                           fontFamily: 'Bold',
                         ),
                         IconButton(
-                            iconSize: 60,
-                            color: primary,
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) =>
-                                      const DeliveryScreen()));
-                            },
-                            icon: const Icon(Icons.arrow_circle_right)),
+                          iconSize: 60,
+                          color: primary,
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => DeliveryScreen(
+                                  farmName: farmNameController.text,
+                                  address: addressController.text,
+                                  contactNumber: contactnumberController.text,
+                                ),
+                              ),
+                            );
+                          },
+                          icon: const Icon(Icons.arrow_circle_right),
+                        ),
                       ],
                     ),
                   ),
